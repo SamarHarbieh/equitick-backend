@@ -14,7 +14,7 @@ class TradesController extends Controller
      */
     public function index()
     {
-        return response->json(['data' =>Trade::all()]);
+        return Trade::paginate(20);
     }
 
     /**
@@ -35,7 +35,18 @@ class TradesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'Login' => 'required|integer',
+            'Deal' => 'required|integer',
+            'Entry' => 'required|integer',
+            'Action'=>'required|integer',
+            'Time' => 'required|date',
+            'Symbol' => 'required|string',
+            'Price' => 'required|float',
+            'Profit' => 'required|float',
+            'Volume' => 'required|integer',
+        ]);
+        return Trade::create($request->all());
     }
 
     /**
@@ -44,20 +55,9 @@ class TradesController extends Controller
      * @param  \App\Models\Trade  $trade
      * @return \Illuminate\Http\Response
      */
-    public function show(Trade $trade)
+    public function show($Deal)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Trade  $trade
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Trade $trade)
-    {
-        //
+        return Trade::where("Deal", $Deal)->get();
     }
 
     /**
@@ -67,9 +67,11 @@ class TradesController extends Controller
      * @param  \App\Models\Trade  $trade
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Trade $trade)
+    public function update(Request $request, $Deal)
     {
-        //
+        $trade = Trade::where("Deal", $Deal)->update($request->all());
+    
+        return $trade;
     }
 
     /**
@@ -78,8 +80,9 @@ class TradesController extends Controller
      * @param  \App\Models\Trade  $trade
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Trade $trade)
+    public function destroy($Deal)
     {
-        //
+        $trade = Trade::where("Deal",$Deal)->delete();
+     return $trade;
     }
 }

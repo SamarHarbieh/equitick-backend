@@ -1,5 +1,5 @@
 <?php
-use App\Models\Trade;
+use App\Http\Controllers\TradesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -13,11 +13,15 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::get('/trades', function(){
-    return Trade::all();
-});
+Route::get('/trades', [TradesController::class, 'index']);
+// Route::get('/trades/{Deal}',[TradesController::class, 'show']);
+Route::post('/trades', [TradesController::class, 'store']);
+Route::put('/trades/{Deal}',[TradesController::class,'update']);
+Route::delete('/trades/{Deal}',[TradesController::class, 'destroy']);
+
+// Route::resource('trades', TradesController::class);
 
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['middleware' => ['auth:sanctum']], function(){
+    Route::get('/trades/{Deal}',[TradesController::class, 'show']);
 });
