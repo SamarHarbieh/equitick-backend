@@ -14,7 +14,7 @@ class TradesController extends Controller
      */
     public function index()
     {
-        return Trade::paginate(20);
+        return Trade::paginate(10);
     }
 
     /**
