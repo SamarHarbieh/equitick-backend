@@ -7,19 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Trade extends Model
 {
-    protected $table = 'mt5_deals';
     protected $fillable = [
-        'Deal',
-'Login',
-'Action',
-'Entry',
-'Time',
-'Symbol',
-'Price',
-'Profit',
-'Volume'
-    ];
-
-    public $timestamps = false;
+        'Login',
+        'Action',
+        'Entry',
+        'Time',
+        'Symbol',
+        'Price',
+        'Profit',
+        'Volume'
+           ];
+        
+    use HasFactory;
 }
-

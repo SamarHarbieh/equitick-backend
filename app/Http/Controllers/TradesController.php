@@ -14,6 +14,13 @@ class TradesController extends Controller
      */
     public function index(Request $request)
     {
+        // $data = Trade::limit(50)->get();
+        // $data =  array_values($data->toArray());
+        
+        // $result = array_unique(array_column($data, 'Login'));
+        // return $result;
+
+
         if($request->Deal && $request->Login) {
         return Trade::where('Deal','like',$request->Deal.'%')->where('Login',$request->Login)->paginate(10);
         }
@@ -49,7 +56,7 @@ class TradesController extends Controller
             'Deal' => 'required|integer',
             'Entry' => 'required|integer',
             'Action'=>'required|integer',
-            'Time' => 'required|date',
+            'Time' => 'required|datetime',
             'Symbol' => 'required|string',
             'Price' => 'required|float',
             'Profit' => 'required|float',

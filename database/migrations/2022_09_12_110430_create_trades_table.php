@@ -14,11 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('trades', function (Blueprint $table) {
-            $table->bigIncrements('Deal')->from(3217172)->unsigned();
+            $table->bigIncrements('Deal')->from(3200000)->unsigned();
             $table->bigInteger('Login')->default(0);
             $table->integer('Entry')->default(0);
             $table->integer('Action')->default(0);
-            $table->Time()->date()->nullable();
+            $table->datetime('Time')->nullable();
             $table->string('Symbol');
             $table->double('Price');
             $table->double('Profit');

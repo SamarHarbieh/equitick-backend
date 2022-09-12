@@ -5,7 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Trades extends Model
+class MT5 extends Model
 {
-    use HasFactory;
+    protected $table = 'mt5_deals';
+
+
+    public $timestamps = false;
 }
+
