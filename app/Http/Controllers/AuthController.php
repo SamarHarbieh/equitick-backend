@@ -14,12 +14,14 @@ class AuthController extends Controller
             'name' => 'required|string',
             'email' => 'required|string|unique:users,email',
             'password' => 'required|string|confirmed',
+            'isAdmin' => 'boolean',
         ]);
 
         $user = User::create([
             'name' => $fields['name'],
             'email' => $fields['email'],
             'password' => bcrypt($fields['password']),
+            'isAdmin' => array_key_exists('isAdmin', $fields) ? $fields['isAdmin'] : 1,
         ]);
 
         $token = $user->createToken('myapptoken')->plainTextToken;

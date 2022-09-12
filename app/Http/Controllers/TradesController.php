@@ -14,23 +14,16 @@ class TradesController extends Controller
      */
     public function index(Request $request)
     {
-        // $data = Trade::limit(50)->get();
-        // $data =  array_values($data->toArray());
-        
-        // $result = array_unique(array_column($data, 'Login'));
-        // return $result;
-
-
         if($request->Deal && $request->Login) {
-        return Trade::where('Deal','like',$request->Deal.'%')->where('Login',$request->Login)->paginate(10);
+        return Trade::where('Deal','like',$request->Deal.'%')->where('Login',$request->Login)->orderBy('Time','desc')->paginate(10);
         }
         if($request->Deal){
-            return Trade::where('Deal','like',$request->Deal.'%')->paginate(10);
+            return Trade::where('Deal','like',$request->Deal.'%')->paginate(10)->orderBy('Time','desc');
         }
         if($request->Login){
-            return Trade::where('Login', $request->Login)->paginate(10);
+            return Trade::where('Login', $request->Login)->orderBy('Time','desc')->paginate(10);
         }
-        return Trade::paginate(10);
+        return Trade::orderBy('Time','desc')->paginate(10);
     }
 
     /**
@@ -53,14 +46,13 @@ class TradesController extends Controller
     {
         $request->validate([
             'Login' => 'required|integer',
-            'Deal' => 'required|integer',
             'Entry' => 'required|integer',
             'Action'=>'required|integer',
-            'Time' => 'required|datetime',
-            'Symbol' => 'required|string',
-            'Price' => 'required|float',
-            'Profit' => 'required|float',
-            'Volume' => 'required|integer',
+            'Time' => 'datetime',
+            'Symbol' => 'string',
+            'Price' => 'required|numeric',
+            'Profit' => 'required|numeric',
+            'Volume' => 'integer',
         ]);
         return Trade::create($request->all());
     }

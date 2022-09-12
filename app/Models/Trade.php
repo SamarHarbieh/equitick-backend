@@ -17,6 +17,8 @@ class Trade extends Model
         'Profit',
         'Volume'
            ];
-        
+       
+           
+           public $timestamps = false; 
     use HasFactory;
 }
