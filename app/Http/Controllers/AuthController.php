@@ -21,7 +21,7 @@ class AuthController extends Controller
             'name' => $fields['name'],
             'email' => $fields['email'],
             'password' => bcrypt($fields['password']),
-            'isAdmin' => array_key_exists('isAdmin', $fields) ? $fields['isAdmin'] : 1,
+            'isAdmin' => array_key_exists('isAdmin', $fields) ? $fields['isAdmin'] : 0,
         ]);
 
         $token = $user->createToken('myapptoken')->plainTextToken;
@@ -47,7 +47,7 @@ class AuthController extends Controller
         // Check password
         if(!$user || !Hash::check($fields['password'], $user->password)) {
             return response([
-                'message' => 'Bad credentials'
+                'message' => 'Invalid credentials'
             ], 401);
         }
 
