@@ -20,7 +20,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::group(['middleware' => ['auth:sanctum']], function(){
     // Trades routes
     Route::get('/trades', [TradesController::class, 'index']);
-    Route::get('/trades/{Deal}',[TradesController::class, 'show']);
+    // Route::get('/trades/{Deal}',[TradesController::class, 'show']);
     Route::post('/trades', [TradesController::class, 'store']);
     Route::put('/trades/{Deal}',[TradesController::class,'update']);
     Route::delete('/trades/{Deal}',[TradesController::class, 'destroy']);

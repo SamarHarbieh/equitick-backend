@@ -12,8 +12,17 @@ class TradesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if($request->Deal && $request->Login) {
+        return Trade::where('Deal','like',$request->Deal.'%')->where('Login',$request->Login)->paginate(10);
+        }
+        if($request->Deal){
+            return Trade::where('Deal','like',$request->Deal.'%')->paginate(10);
+        }
+        if($request->Login){
+            return Trade::where('Login', $request->Login)->paginate(10);
+        }
         return Trade::paginate(10);
     }
 
