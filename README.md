@@ -9,7 +9,7 @@ The data consists of users and trades. Each user will be authenticated (JWT) to 
 ### Setup
 
 -   clone the repository
--   switch to the development1 branch
+-   switch to the production branch
 -   run composer install
 
 #### Run the project
