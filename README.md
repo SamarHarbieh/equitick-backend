@@ -11,7 +11,6 @@ The data consists of users and trades. Each user will be authenticated (JWT) to 
 -   clone the repository
 -   switch to the development1 branch
 -   run composer install
--
 
 #### Run the project
 
