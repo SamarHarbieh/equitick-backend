@@ -12,17 +12,40 @@ class TradesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // public function index(Request $request)
+    // {
+    //     if($request->Deal && $request->Login) {
+    //     return Trade::where('Deal','like',$request->Deal.'%')->where('Login',$request->Login)->orderBy('Time','desc')->paginate(10);
+    //     }
+    //     if($request->Deal){
+    //         return Trade::where('Deal','like',$request->Deal.'%')->paginate(10)->orderBy('Time','desc');
+    //     }
+    //     if($request->Login){
+    //         return Trade::where('Login', $request->Login)->orderBy('Time','desc')->paginate(10);
+    //     }
+    //     return Trade::orderBy('Time','desc')->paginate(10);
+    // }
+
+
+    //'%' . $word .'%'
     public function index(Request $request)
     {
-        if($request->Deal && $request->Login) {
-        return Trade::where('Deal','like',$request->Deal.'%')->where('Login','like',$request->Login.'%')->orderBy('Time','desc')->paginate(10);
+        if($request->DealFilter && $request->LoginFilter) {
+        return Trade::where('Deal','like','%' .$request->DealFilter.'%')->where('Login','like', '%' .$request->LoginFilter.'%')->orderBy('Time','desc')->paginate(10);
         }
-        if($request->Deal){
-            return Trade::where('Deal','like',$request->Deal.'%')->orderBy('Time','desc')->paginate(10);
+        if($request->DealFilter && $request->Login) {
+            return Trade::where('Deal','like','%' .$request->DealFilter.'%')->where('Login', $request->Login)->orderBy('Time','desc')->paginate(10);
+            }
+        if($request->DealFilter){
+            return Trade::where('Deal','like','%' .$request->DealFilter.'%')->orderBy('Time','desc')->paginate(10);
+        }
+        if($request->LoginFIlter){
+            return Trade::where('Login', 'like', '%' .$request->LoginFilter.'%')->orderBy('Time','desc')->paginate(10);
         }
         if($request->Login){
-            return Trade::where('Login','like',$request->Login.'%')->orderBy('Time','desc')->paginate(10);
+            return Trade::where('Login', $request->Login)->orderBy('Time','desc')->paginate(10);
         }
+
         return Trade::orderBy('Time','desc')->paginate(10);
     }
 
